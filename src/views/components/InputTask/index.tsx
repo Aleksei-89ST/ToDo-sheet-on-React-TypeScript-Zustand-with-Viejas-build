@@ -1,4 +1,4 @@
-import React, {  useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./index.module.scss";
 
 interface InputTaskProps {
@@ -19,12 +19,12 @@ export const InputTask: React.FC<InputTaskProps> = ({
   const [checked, setChecked] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [value, setValue] = useState(title);
-  const editTetleInputRef = useRef<HTMLInputElement>(null)
+  const editTetleInputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
-if (isEditMode) {
-  editTetleInputRef?.current?.focus();
-}
-  },[isEditMode]);
+    if (isEditMode) {
+      editTetleInputRef?.current?.focus();
+    }
+  }, [isEditMode]);
   return (
     <div className={styles.inputTask}>
       <label className={styles.inputTaskLabel}>
@@ -39,7 +39,6 @@ if (isEditMode) {
               setTimeout(() => {
                 onDone(id);
               }, 300);
-             
             }
           }}
         />
@@ -50,13 +49,13 @@ if (isEditMode) {
             onChange={(e) => {
               setValue(e.target.value);
             }}
-            onKeyDown = {(e) => {
-              if(e.key === 'Enter') {
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
                 onEdited(id, value);
                 setIsEditMode(false);
               }
             }}
-            className={styles.inputTaskEditTitle} 
+            className={styles.inputTaskEditTitle}
           />
         ) : (
           <h3 className={styles.inputTaskTitle}>{title}</h3>
